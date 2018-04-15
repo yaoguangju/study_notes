@@ -1,0 +1,353 @@
+1.numpy属性
+    输入：
+        import numpy as np
+        #np.array实现将列表转换成为一个矩阵
+        array = np.array([[1,2,3],
+                          [4,5,6]])
+
+        print(array)                        #打印矩阵
+        print('number of dim:',array.ndim)  #输出矩阵的维数
+        print('shape:',array.shape)         #输出矩阵的形状
+        print('size:',array.size)           #输出矩阵的元素个数
+    输出：
+        [[1 2 3]
+         [4 5 6]]
+        number of dim: 2
+        shape: (2, 3)
+        size: 6
+
+2.定义0和1和空矩阵
+    输入：
+        import numpy as np
+        a = np.zeros((3,4))
+        print(a)
+    输出：
+        [[ 0.  0.  0.  0.]
+         [ 0.  0.  0.  0.]
+         [ 0.  0.  0.  0.]]
+    输入：
+        import numpy as np
+        a = np.ones((3,4),dtype=np.int16)
+        print(a)
+    输出：
+        [[1 1 1 1]
+         [1 1 1 1]
+         [1 1 1 1]]
+    输入：
+        import numpy as np
+        a = np.empty((3,4))
+        print(a)
+    输出：
+        #一些十分接近0的数字组成
+        [[  2.44763557e-307   1.69119330e-306   1.33514617e-307   3.56011818e-307]
+         [  1.60219306e-306   1.22386447e-307   1.61322099e-307   3.56043053e-307]
+         [  1.60219306e-306   2.44763557e-307   1.69119330e-306   3.22649800e-307]] 
+
+3.定义顺序矩阵
+    输入：
+        import numpy as np
+        a = np.arange(10,20,2) #arange类似python中的range函数
+        print(a)
+    输出：
+        [10 12 14 16 18]
+    输入：
+        import numpy as np
+        a = np.arange(12).reshape((3,4))   #定义了矩阵的形状
+        print(a)
+    输出：
+        [[ 0  1  2  3]
+         [ 4  5  6  7]
+         [ 8  9 10 11]]
+    输入：
+        import numpy as np
+        a = np.linspace(1, 10, 4)   #此时4为把1到10分成等距的4个点
+        print(a)
+    输出：
+        [  1.   4.   7.  10.]
+
+4.矩阵的计算
+    输入：
+        import numpy as np
+        a = np.array([10,20,30,40])
+        b = np.arange(4)
+        print(a,b)
+        c=a-b    #加减乘同理，对应元素. b**2 b**3同理  np.sin(a),np.cos(a)求三角函数
+        print(c)
+    输出：
+        [10 20 30 40] [0 1 2 3]
+        [10 19 28 37]
+
+5.矩阵的判断
+    输入：
+        import numpy as np
+        b = np.arange(4)
+        print(b)
+        print(b<3)
+    输出：
+        [0 1 2 3]
+        [ True  True  True False]
+
+6.矩阵的两种乘法
+    输入：
+        import numpy as np
+        a = np.array([[1,1],
+                      [0,1]])
+        b = np.arange(4).reshape((2,2))
+        
+        c=a*b    #每一个数字对应相乘
+        c_dot = np.dot(a,b)    #按照矩阵乘法的运算规则来计算
+        c_dot_2 = a.dot(b)
+        
+        print(c)
+        print(c_dot)
+        print(c_dot_2)
+    输出：
+        [[0 1]
+         [0 3]]
+        [[2 4]
+         [2 3]]
+        [[2 4]
+         [2 3]]
+
+7.矩阵的基本操作
+    输入：
+        import numpy as np
+        a = np.random.random((2,4))    #取0-1的随机数
+        print(a)
+        print(np.sum(a,axis=1))        #每行求和
+        print(np.min(a,axis=0))        #每列求和            #助记：0列1行
+        print(np.max(a,axis=1))        #每行最大值
+    输出：
+        [[ 0.18708776  0.6420766   0.70221441  0.17809046]
+         [ 0.65578665  0.72435664  0.22988356  0.92430658]]
+        [ 1.70946923  2.53433343]
+        [ 0.18708776  0.6420766   0.22988356  0.17809046]
+        [ 0.70221441  0.92430658]
+    输入：
+        import numpy as np
+        a = np.arange(2,14).reshape((3,4))
+        print(a)
+        print('\n')
+        print(np.argmin(a))    #输出最小数的位置
+        print(np.argmax(a))    #输出最大值的位置
+        print('\n')
+        print(np.mean(a))
+        print(a.mean())        #平均值
+        print(np.average(a))
+        print('\n')
+        print(np.median(a))    #中位数
+        print('\n')
+        print(np.cumsum(a))    #逐步累加
+        print(np.diff(a))      #逐步类差
+    输出：
+        [[ 2  3  4  5]
+        [ 6  7  8  9]
+        [10 11 12 13]]
+
+        0
+        11
+
+        7.5
+        7.5
+        7.5
+
+        7.5
+
+        [ 2  5  9 14 20 27 35 44 54 65 77 90]
+        [[1 1 1]
+        [1 1 1]
+        [1 1 1]]
+        
+        注：np.sort(a)为对矩阵a进行按行排序.
+8.矩阵的转置
+    输入：
+        import numpy as np
+        a = np.arange(2,14).reshape((3,4))
+        print(a)
+        print('\n')
+        print(np.transpose(a))
+        print('\n')
+        print(a.T)
+        print(a.T.dot(a))
+    输出：
+        [[ 2  3  4  5]
+         [ 6  7  8  9]
+         [10 11 12 13]]
+
+        [[ 2  6 10]
+         [ 3  7 11]
+         [ 4  8 12]
+         [ 5  9 13]]
+
+        [[ 2  6 10]
+         [ 3  7 11]
+         [ 4  8 12]
+         [ 5  9 13]]
+        [[140 158 176 194]
+         [158 179 200 221]
+         [176 200 224 248]
+         [194 221 248 275]]
+
+9.矩阵的其他用法
+    输入：
+        import numpy as np
+        a = np.arange(2,14).reshape((3,4))
+        print(a)
+        print('\n')
+        print(np.clip(a,5,9))
+        print('\n')
+        print(np.mean(a,axis=0))
+    
+    输出：
+        [[ 2  3  4  5]
+         [ 6  7  8  9]
+         [10 11 12 13]]
+
+        [[5 5 5 5]
+         [6 7 8 9]
+         [9 9 9 9]]
+
+        [ 6.  7.  8.  9.]
+
+10.numpy的索引
+    输入：
+        import numpy as np
+        a = np.arange(3,15).reshape((3,4))
+        print(a)
+        print(a[2])
+        print(a[1][1])
+        print(a[1,1])
+        print(a[1,1:3])
+    输出：
+        [[ 3  4  5  6]
+         [ 7  8  9 10]
+         [11 12 13 14]]
+        [11 12 13 14]
+        8
+        8
+        [8 9]
+
+11.矩阵的迭代
+    输入：
+        import numpy as np
+        a = np.arange(3,15).reshape((3,4))
+        print(a)
+
+        for row in a:
+            print(row)
+
+        for column in a.T:
+            print(column)
+
+        print(a.flatten())
+        for item in a.flat:
+            print(item)
+    输出：
+        [[ 3  4  5  6]
+         [ 7  8  9 10]
+         [11 12 13 14]]
+        [3 4 5 6]
+        [ 7  8  9 10]
+        [11 12 13 14]
+        [ 3  7 11]
+        [ 4  8 12]
+        [ 5  9 13]
+        [ 6 10 14]
+        [ 3  4  5  6  7  8  9 10 11 12 13 14]
+        3
+        4
+        5
+        6
+        7
+        8
+        9
+        10
+        11
+        12
+        13
+        14
+
+12.矩阵的合并
+    输入:
+        import numpy as np
+        A = np.array([1,1,1])
+        B = np.array([2,2,2])
+
+        C = np.vstack((A,B))    #上下合并
+        D = np.hstack((A,B))    #左右合并
+
+        print(C)
+        print(A.shape,C.shape)
+
+        print(D)
+        print(A.shape,D.shape)
+    输出:
+        [[1 1 1]
+         [2 2 2]]
+        (3,) (2, 3)
+        [1 1 1 2 2 2]
+        (3,) (6,)
+
+    输入：
+        import numpy as np
+        A = np.array([1,1,1])[:,np.newaxis]
+        B = np.array([2,2,2])[:,np.newaxis]
+        print('A矩阵：')
+        print(A)
+        C = np.concatenate((A,B,B,A),axis=0) #竖着加
+        D = np.concatenate((A,B,B,A),axis=1) #横着加
+        print('C矩阵：')
+        print(C)
+        print('D矩阵：')
+        print(D)
+    输出：
+        A矩阵：
+        [[1]
+         [1]
+         [1]]
+        C矩阵：
+        [[1]
+         [1]
+         [1]
+         [2]
+         [2]
+         [2]
+         [2]
+         [2]
+         [2]
+         [1]
+         [1]
+         [1]]
+        D矩阵：
+        [[1 2 2 1]
+         [1 2 2 1]
+         [1 2 2 1]]
+13.矩阵的分割
+    输入：
+        import numpy as np
+        A = np.arange(12).reshape((3,4))
+        print(A)
+
+        print(np.split(A,3,axis=0)) #axis=0按行分割，axis=1按列分割，等量按照行分3次，不等量的分割用array_split函数
+    输出：
+        [[ 0  1  2  3]
+         [ 4  5  6  7]
+         [ 8  9 10 11]]
+        [array([[0, 1, 2, 3]]), array([[4, 5, 6, 7]]), array([[ 8,  9, 10, 11]])]
+    输入：
+        import numpy as np
+        A = np.arange(12).reshape((3,4))
+        print(A)
+
+        print(np.vsplit(A,3))  #按行分割
+        print(np.hsplit(A,2))  #按列分割
+    输出：
+        [[ 0  1  2  3]
+         [ 4  5  6  7]
+         [ 8  9 10 11]]
+        [array([[0, 1, 2, 3]]), array([[4, 5, 6, 7]]), array([[ 8,  9, 10, 11]])]
+        [array([[0, 1],
+                [4, 5],
+                [8, 9]]), array([[ 2,  3],
+                [ 6,  7],
+                [10, 11]])]
